@@ -1,5 +1,0 @@
-author: Kurfursten
-delete-after: true
-changes:
-- bugfix: Crickets will now only spawn on the station as a consequence of Crickets
-    Behind the Fridge event.
