@@ -1,4 +1,0 @@
-author: jwhitak
-delete-after: true
-changes:
-- bugfix: Fixed conveyors moving strangely when next to certain diagonal belts
