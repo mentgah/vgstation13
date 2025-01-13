@@ -1,7 +1,0 @@
-author: brndd
-delete-after: true
-changes:
-- tweak: Adamantine golem runes made in xenobiology now use ghost recruitment mechanics
-    similar to posibrains and borer eggs. The rune will try to recruit a ghost every
-    5 minutes for as long as it exists. The runes can now also be cleaned up like
-    any other decal using e.g. soap.
