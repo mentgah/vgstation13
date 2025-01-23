@@ -1,0 +1,4 @@
+author: boy2mantwicethefam
+delete-after: true
+changes:
+- tweak: Suicide victims that are revived by Panacea will no longer quickly die again.
