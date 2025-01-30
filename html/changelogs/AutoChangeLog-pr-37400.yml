@@ -1,0 +1,5 @@
+author: MercuriusGH
+delete-after: true
+changes:
+- bugfix: Fixed incorrectly named insectoid straitjacket sprite.
+- imageadd: Added vox straitjacket sprites courtesy of Falcon2346.
