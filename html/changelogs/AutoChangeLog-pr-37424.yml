@@ -1,5 +1,0 @@
-author: SonixApache
-delete-after: true
-changes:
-- bugfix: Syndicate traitors who want objectives are now once again supplied with
-    them.
