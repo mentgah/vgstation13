@@ -1,4 +1,0 @@
-author: Kurfursten
-delete-after: true
-changes:
-- bugfix: AM containment jars now properly update sprite when recharged with radiation.
