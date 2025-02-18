@@ -1,0 +1,8 @@
+author: SECBATON-GRIFFON
+delete-after: true
+changes:
+- tweak: Scientist biosuits now offer some protection from slime attacks and slime
+    feeding. (half reduction for the latter)
+- spellcheck: Messages from slime feeding sent to the slime and feedee are now formatted
+    better.
+- spellcheck: Biosuit descriptions now spell "contaminant" properly.
