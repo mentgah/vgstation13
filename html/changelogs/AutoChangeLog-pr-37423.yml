@@ -1,0 +1,5 @@
+author: Kurfursten
+delete-after: true
+changes:
+- bugfix: Battlemats allow you to pick up game pieces no matter what side of the board
+    you are sitting on.
