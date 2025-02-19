@@ -1,0 +1,5 @@
+author: Eneocho
+delete-after: true
+changes:
+- rscadd: Blitzkrieg module cyborgs (Nuke Ops) now carry an emag for door busting
+    purposes.
