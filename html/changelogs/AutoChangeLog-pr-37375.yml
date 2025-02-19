@@ -1,0 +1,7 @@
+author: brndd
+delete-after: true
+changes:
+- rscadd: 'R&D can now build the spiderbot fabricator: a machine that allows ghosts
+    to respawn as spiderbots. It must be loaded with metal sheets to work. Build it
+    by researching Programming 4 and Engineering 4 and printing the board from the
+    circuit imprinter.'
