@@ -1,5 +1,0 @@
-author: Kurfursten
-delete-after: true
-changes:
-- rscadd: You may now insert your ID by clicking it on the medical records computer
-    rather than having to open the UI first.
