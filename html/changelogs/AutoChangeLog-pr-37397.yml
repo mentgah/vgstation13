@@ -1,0 +1,13 @@
+author: CrazyAmphibian
+delete-after: true
+changes:
+- rscadd: 'A new engine has been added: fission reactors! Used in conjunction with
+    a TEG, they can make a respectable amount of power with a low upkeep.'
+- rscadd: Fission reactors can either be ordered from a cargo crate, or unlocked with
+    the help of the science department and miners.
+- rscadd: Fueling a fission reactor will require some outside assistance. Ask a miner
+    for some uranium, or the chemist for some radium.
+- rscadd: Fission reactors can convert certain non-fuel reagents into them to more
+    exotic ones.
+- rscadd: 'Fission reactors will produce a new gas as a byproduct: Radon. Radon is
+    highly radioactive, and can supercharge the supermatter (caution is advised)'
