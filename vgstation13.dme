@@ -2467,6 +2467,7 @@
 #include "code\modules\RCD\schematic.dm"
 #include "code\modules\RCD\tile painter.dm"
 #include "code\modules\RCD\schematics\engi.dm"
+#include "code\modules\RCD\schematics\engineering_rcd.dm"
 #include "code\modules\RCD\schematics\pipe.dm"
 #include "code\modules\RCD\schematics\rcd_window_spawner.dm"
 #include "code\modules\RCD\schematics\service.dm"
