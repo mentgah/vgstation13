@@ -1,0 +1,4 @@
+author: Kurfursten
+delete-after: true
+changes:
+- rscadd: You now get a message when you start putting a crate in the disposals.
