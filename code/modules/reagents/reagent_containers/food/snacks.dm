@@ -597,7 +597,7 @@
 			return 1
 		if(slice_act(user,W))
 			return 1
-		
+
 	if (istype(W, /obj/item/candle)) //candles added on afterattack
 		return 0
 
@@ -4359,7 +4359,7 @@
 	base_crumb_chance = 20
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/on_vending_machine_spawn()
-	reagents.chem_temp = FRIDGETEMP_FREEZER
+	reagents.chem_temp = COOKTEMP_READY
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/margherita
 	name = "Margherita"
