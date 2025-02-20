@@ -1,0 +1,5 @@
+author: Kurfursten
+delete-after: true
+changes:
+- bugfix: Miming characters will no longer verbally practice while learning a new
+    language.
