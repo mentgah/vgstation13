@@ -1,0 +1,8 @@
+author: Eneocho
+delete-after: true
+changes:
+- spellcheck: Fixes several typos and improper capitalization on a bunch of fission
+    reactor stuff.
+- spellcheck: Renames the Fuel Rod (object) to Fuel Reservoir, to reduce the confusion
+    between the machinery fuel rod and the object, since no matter how many fuel rod
+    cores you have in your reactor, you only ever need 1 (one) fuel rod (now reservoir).
