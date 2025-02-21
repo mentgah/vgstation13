@@ -1,0 +1,6 @@
+author: Kurfursten
+delete-after: true
+changes:
+- bugfix: You can now do some actions like loading someone into an inflatable shelter,
+    styling someone else's hair, or reloading a vending machine even if you have progress
+    bars turned off.
