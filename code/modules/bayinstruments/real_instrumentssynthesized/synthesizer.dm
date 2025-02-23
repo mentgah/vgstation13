@@ -102,7 +102,7 @@
 	icon_state = "nusynth"
 	anchored = 1
 	density = 1
-	var/datum/instrument/instruments = list()
+	var/list/instruments = list()
 
 /obj/structure/synthesized_instrument/synthesizer/New()
 	..()
@@ -183,8 +183,7 @@
 
 	var/list/instruments_ids = list()
 	var/list/datum/instrument/instruments_by_id = list()
-	var/list/ins_list = instruments
-	for (var/ins in ins_list)
+	for (var/ins in instruments)
 		var/datum/instrument/instr = instruments[ins]
 		instruments_by_id[instr.id] = instr
 		instruments_ids += instr.id
@@ -328,14 +327,13 @@
 			src.player.song.soft_coeff = new_coeff
 		if ("instrument")
 			var/list/categories = list()
-			var/list/ins_list = instruments
-			for (var/key in ins_list)
+			for (var/key in instruments)
 				var/datum/instrument/instrument = instruments[key]
 				categories |= instrument.category
 
 			var/category = input(usr, "Choose a category") in categories 
 			var/list/instruments_available = list()
-			for (var/key in ins_list)
+			for (var/key in instruments)
 				var/datum/instrument/instrument = instruments[key]
 				if (instrument.category == category)
 					instruments_available += key
