@@ -43,27 +43,48 @@
 
 /datum/music_code/proc/octave_code()
 	if (src.octave!=null)
-		var/sym = (octave_condition==LESSER ? "<" :
-		           octave_condition==EQUAL ? "=" :
-		           octave_condition==GREATER_MUSIC ? ">" : null)
+		var/sym = ""
+		switch(octave_condition)
+			if(LESSER)
+				sym = "<"
+			if(EQUAL)
+				sym = "="
+			if(GREATER_MUSIC)
+				sym = ">"
+			else
+				sym = null
 		return "O[sym][octave]"
 	return ""
 
 
 /datum/music_code/proc/line_num_code()
 	if (src.line_num)
-		var/sym = (line_condition==LESSER ? "<" :
-		           line_condition==EQUAL ? "=" :
-		           line_condition==GREATER_MUSIC ? ">" : null)
+		var/sym = ""
+		switch(line_condition)
+			if(LESSER)
+				sym = "<"
+			if(EQUAL)
+				sym = "="
+			if(GREATER_MUSIC)
+				sym = ">"
+			else
+				sym = null
 		return "L[sym][line_num]"
 	return ""
 
 
 /datum/music_code/proc/line_note_num_code()
 	if (src.line_note_num)
-		var/sym = (line_note_condition==LESSER ? "<" :
-		           line_note_condition==EQUAL ? "=" :
-		           line_note_condition==GREATER_MUSIC ? ">" : null)
+		var/sym = ""
+		switch(line_note_condition)
+			if(LESSER)
+				sym = "<"
+			if(EQUAL)
+				sym = "="
+			if(GREATER_MUSIC)
+				sym = ">"
+			else
+				sym = null
 		return "N[sym][line_note_num]"
 	return ""
 
