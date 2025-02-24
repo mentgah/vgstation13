@@ -54,11 +54,13 @@ included:
 				return
 		var/obj/item/tool/weldingtool/WT = I
 		user.visible_message("<span class='notice'>[user] starts welding \the [src]'s external plating off its frame.</span>", "<span class='notice'>You start welding \the [src]'s external plating off its frame.</span>")
-		if(WT.do_weld(user,src,60,0))
+		if(WT.do_weld(user,src,40,0))
 			var/obj/structure/girder/reactor/newcase= new /obj/structure/girder/reactor(loc)
 			newcase.forceMove(loc)
+			newcase.dir=dir
 			newcase.pipeadded=TRUE
 			newcase.state=3
+			newcase.update_icon()
 			qdel(src)
 			
 /obj/machinery/atmospherics/unary/fissionreactor_coolantport/update_icon()
@@ -760,10 +762,11 @@ included:
 				return
 		var/obj/item/tool/weldingtool/WT = I
 		user.visible_message("<span class='notice'>[user] starts welding \the [src]'s external plating off its frame.</span>", "<span class='notice'>You start welding \the [src]'s external plating off its frame.</span>")
-		if(WT.do_weld(user,src,60,0))
+		if(WT.do_weld(user,src,40,0))
 			var/obj/structure/girder/reactor/newcase= new /obj/structure/girder/reactor(loc)
 			newcase.forceMove(loc)
 			newcase.state=3
+			newcase.update_icon()
 			qdel(src)
 
 
@@ -783,9 +786,15 @@ included:
 /obj/structure/girder/reactor
 	name="reactor casing girder"
 	material=/obj/item/stack/sheet/plasteel
-	construction_length=60
+	construction_length=40
 	var/pipeadded=FALSE
-	
+
+
+/obj/structure/girder/reactor/update_icon()	
+	..()
+	overlays=null
+	if(pipeadded)
+		overlays+=image('icons/obj/fissionreactor/reactorcase.dmi', src,"coonantpipeoverlay")	
 	
 /obj/structure/girder/reactor/examine()
 	..()
@@ -816,7 +825,7 @@ included:
 				if (dir&NORTH)
 					dirstr="north"
 				if (dir&SOUTH)
-					dirstr="soth"
+					dirstr="south"
 				if (dir&EAST)
 					dirstr="east"
 				if (dir&WEST)
@@ -847,7 +856,7 @@ included:
 				user.visible_message("<span class='notice'>[user] starts disassembling \the [src].</span>", "<span class='notice'>You start disassembling \the [src].</span>")
 				if(do_after(user, src, construction_length))
 					user.visible_message("<span class='warning'>[user] dissasembles \the [src].</span>", "<span class='notice'>You dissasemble \the [src].</span>")
-					new material(get_turf(src), 2)
+					new material(get_turf(src), 4)
 					qdel(src)
 				return
 			to_chat(user, "<span class='notice'>You can't find a use for \the [W]</span>")
@@ -911,15 +920,17 @@ included:
 					return
 				qdel(W)
 				pipeadded=TRUE
+				overlays+=image('icons/obj/fissionreactor/reactorcase.dmi', src,"coonantpipeoverlay")	
 				user.visible_message("<span class='notice'>[user] adds piping into \the [src].</span>", "<span class='notice'>You add piping into \the [src].</span>")	
 				return
 			if(pipeadded && W.is_wrench(user))
 				W.playtoolsound(src, 100)	
 				to_chat(user, "<span class='notice'>You remove the piping from \the [src]</span>")	
 				var/obj/item/pipe/np= new /obj/item/pipe(loc)
-				np.pipe_type=1
+				np.pipe_type=0
 				np.forceMove(loc)
 				pipeadded=FALSE
+				overlays=null
 				return
 			if(pipeadded && iscrowbar(W))
 				W.playtoolsound(src, 100)

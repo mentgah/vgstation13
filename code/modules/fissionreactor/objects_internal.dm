@@ -25,11 +25,22 @@ included:
 		associated_reactor.handledestruction(src)
 	..()
 
+//commented out while a better sound solution is added, since this is buggy. here because pushing a hotfix.
+/*
+/obj/machinery/fissionreactor/process()
+	..()
+	if(associated_reactor && associated_reactor.considered_on())
+		var/volume=30*(1-associated_reactor.control_rod_insertion)+10 //volume ranges 10-40 depending on the rod level
+		playsound(src,'sound/machines/fission/reactor_hum.ogg',volume,1,5) //very low variance. some extra range
+*/
+
+
 /obj/machinery/fissionreactor/fissionreactor_controlrod
 	name="fission reactor control rod assembly"
 	desc="Monitors a nuclear reactor and can slow or halt the fission process if needed."
 	icon='icons/obj/fissionreactor/controlrod.dmi'
 	icon_state="controlrod_off"
+
 	
 /obj/machinery/fissionreactor/fissionreactor_controlrod/examine()
 	..()

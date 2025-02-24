@@ -456,7 +456,6 @@
 		/obj/item/weapon/storage/box/fissionsupply_genericassembly,
 		/obj/item/weapon/circuitboard/fission_control_rod, //gives you 2 expansion parts (control/fuel rod) and the casing needed to add. 
 		/obj/item/weapon/circuitboard/fission_fuel_rod,
-		/obj/item/weapon/circuitboard/fission_control_rod,
 		/obj/item/weapon/circuitboard/fission_fuel_rod,
 		/obj/item/weapon/storage/box/fissionsupply_casing,
 		/obj/item/weapon/storage/box/fissionsupply_casing,

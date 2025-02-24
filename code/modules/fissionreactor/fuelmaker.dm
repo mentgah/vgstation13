@@ -36,7 +36,7 @@ the machine which makes fuel reservoirs have things in them.
 			to_chat(user,"There's already a fuel reservoir inserted into \the [src].")
 		else
 			if(!user.drop_item(I))
-				return
+				return TRUE
 			to_chat(user,"You insert the fuel reservoir into \the [src].")
 			I.forceMove(src)
 			heldrod=I
@@ -46,7 +46,7 @@ the machine which makes fuel reservoirs have things in them.
 			ask_remakeUI()
 			playsound(src,'sound/items/crowbar.ogg',50)
 			update_icon()
-		return
+		return TRUE
 	if(iscrowbar(I) && heldrod)
 		user.visible_message("<span class='notice'>[user] starts prying the fuel reservoir out of \the [src].</span>", "<span class='notice'>You start prying the fuel reservoir out of \the [src].</span>")
 		playsound(src,'sound/items/crowbar.ogg',50)
@@ -56,28 +56,34 @@ the machine which makes fuel reservoirs have things in them.
 			ask_remakeUI()
 			playsound(src,'sound/machines/door_unbolt.ogg',50)
 			update_icon()
-		return
+		return TRUE
 		
 	if(I.is_screwdriver(user))
 		I.playtoolsound(src, 100)
 		user.visible_message("<span class='notice'>[user] [hatchopen ? "closes" : "opens"] the maintenance hatch of the [src].</span>", "<span class='notice'>You [hatchopen ? "close" : "open"] the maintenance hatch of the [src].</span>")	
 		hatchopen=!hatchopen
+		return TRUE
 	if(iscrowbar(I))
 		I.playtoolsound(src, 100)
 		user.visible_message("<span class='warning'>[user] starts prying the electronics out of \the [src].</span>", "<span class='notice'>You start prying the electronics out of \the [src].</span>")
 		if(do_after(user, src, 30 ))
 			user.visible_message("<span class='warning'>[user] pries the electronics out of \the [src]</span>","<span class='notice'>You pry the electronics out of \the [src].</span>")
 			var/obj/machinery/constructable_frame/machine_frame/newframe= new /obj/machinery/constructable_frame/machine_frame(loc)
-			newframe.set_build_state(3)
+			newframe.set_build_state(2)
 			newframe.forceMove(loc)
-			newframe.circuit= new /obj/item/weapon/circuitboard/fission_fuelmaker
-			newframe.components+=new /obj/item/weapon/stock_parts/console_screen
-			newframe.components+=new /obj/item/weapon/stock_parts/manipulator
-			newframe.components+=new /obj/item/weapon/stock_parts/matter_bin
-			newframe.components+=new /obj/item/weapon/stock_parts/matter_bin
-			newframe.components+=new /obj/item/weapon/stock_parts/scanning_module
-			newframe.components+=new /obj/item/weapon/stock_parts/scanning_module
+			new /obj/item/weapon/circuitboard/fission_fuelmaker(loc)
+			new /obj/item/weapon/stock_parts/console_screen(loc)
+			new /obj/item/weapon/stock_parts/manipulator(loc)
+			new /obj/item/weapon/stock_parts/matter_bin(loc)
+			new /obj/item/weapon/stock_parts/matter_bin(loc)
+			new /obj/item/weapon/stock_parts/scanning_module(loc)
+			new /obj/item/weapon/stock_parts/scanning_module(loc)
+			if(container)
+				container.forceMove(loc)
+			if(heldrod)
+				heldrod.forceMove(loc)
 			qdel(src)
+		return TRUE	
 	if( istype(I,/obj/item/weapon/reagent_containers) )
 		var/obj/item/weapon/reagent_containers/C=I
 		if(container)
@@ -90,8 +96,6 @@ the machine which makes fuel reservoirs have things in them.
 		to_chat(user,"You add \the [C] to \the [src]")
 		ask_remakeUI()
 		return TRUE
-		
-
 	//..()
 
 
@@ -171,7 +175,7 @@ the machine which makes fuel reservoirs have things in them.
 		return "no fuel reservoir"
 	if(reagent_id==RADON || reagent_id=="RADON")
 		if(air_contents)
-			var/actually_taken=heldrod.fueldata.take_shit_from(reagent_id,amount ,heldrod.fueldata.fuel)
+			var/actually_taken=heldrod.fueldata.take_shit_from(RADON,amount ,heldrod.fueldata.fuel)
 			if(!air_contents.gas[GAS_RADON])
 				air_contents.gas[GAS_RADON]=0
 			air_contents.gas[GAS_RADON]+=actually_taken
@@ -196,7 +200,7 @@ the machine which makes fuel reservoirs have things in them.
 			var/avalible_gas=air_contents.gas[GAS_RADON] || 0 
 			amount=min(amount,avalible_gas,heldrod.units_of_storage-heldrod.fueldata.fuel.total_volume)
 			air_contents.gas[GAS_RADON]= max(0,avalible_gas-amount)
-			heldrod.fueldata.add_shit_to(reagent_id,amount ,heldrod.fueldata.fuel)
+			heldrod.fueldata.add_shit_to(RADON,amount ,heldrod.fueldata.fuel)
 			air_contents.update_values()	
 			if(network)
 				network.update=1

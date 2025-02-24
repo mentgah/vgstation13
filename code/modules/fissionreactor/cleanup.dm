@@ -35,5 +35,11 @@ objects used when a reactor goes boomy boom so there's some nasty rads and thing
 	
 	
 /obj/machinery/corium/process()
-	for(var/mob/living/l in range(src.loc, 5))
-		l.apply_radiation(rads, RAD_EXTERNAL)
+	for(var/mob/living/l in range(src.loc, 10))
+		var/dx=l.x-x
+		var/dy=l.y-y
+		var/dist=(dx*dx+dy*dy)**0.5
+		l.apply_radiation(rads* (1.0-(dist/14))  , RAD_EXTERNAL) //div by 14 because 10 is a square, so multiply it by root2 to get the max distance as a circle.
+
+
+		

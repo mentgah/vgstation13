@@ -7,10 +7,10 @@ datums for the fission reactor, which includes the fuel and reactor
 #define FISSIONREACTOR_SAFEENUFFTEMP 1000 //temp where SCRAM resets
 
 /datum/fission_reactor_holder
-	var/list/fuel_rods=list() //phase 0 vars, set upon construction
-	var/list/control_rods=list()
-	var/list/coolant_ports=list()
-	var/list/casing_parts=list()
+	var/list/obj/machinery/fissionreactor/fissionreactor_fuelrod/fuel_rods=list() //phase 0 vars, set upon construction
+	var/list/obj/machinery/fissionreactor/fissionreactor_controlrod/control_rods=list()
+	var/list/obj/machinery/atmospherics/unary/fissionreactor_coolantport/coolant_ports=list()
+	var/list/obj/structure/fission_reactor_case/casing_parts=list()
 	var/list/breaches=list()
 	var/obj/machinery/fissioncontroller/controller=null
 	var/heat_capacity=0
@@ -374,7 +374,8 @@ datums for the fission reactor, which includes the fuel and reactor
 		crads=((fuel.wattage-fuel.absorbance)*fuel.life)/100000 //100kw nets 1 rad.
 	for(var/i=1,i<=reactorarea2,i++)
 		if(rand()<=0.5*dt)
-			for (var/obj/o in randomtileinreactor().contents)
+			var/turf/t=randomtileinreactor()
+			for (var/obj/o in t?.contents)
 			
 				if(istype(o, /obj/machinery/fissioncontroller))
 					new /obj/machinery/corium(o.loc,crads+crads*0.5*(rand()-0.5)) //25% variance on the radiation levels.
@@ -391,7 +392,7 @@ datums for the fission reactor, which includes the fuel and reactor
 				else if(istype(o,/obj/machinery/atmospherics/unary/fissionreactor_coolantport))
 					new /obj/machinery/corium(o.loc,crads+crads*0.5*(rand()-0.5))
 					qdel(o)
-				for(var/mob/living/l in range(locate(origin_x,origin_y,zlevel), 5))
+				for(var/mob/living/l in range(locate(origin_x,origin_y,zlevel), 10))
 					l.apply_radiation(crads*5, RAD_EXTERNAL)
 				
 	
@@ -566,7 +567,7 @@ datums for the fission reactor, which includes the fuel and reactor
 		if(rand()>0.5) //50% chance every tick to leak
 			var/datum/gas_mixture/removed= coolant.remove(coolant.total_moles*0.5*dt*rand(),TRUE,TRUE) //when we leak, leak 0-50% of the coolant
 			breachlocation.return_air().merge(removed,TRUE)
-		for(var/mob/living/l in range(breachlocation, 5))
+		for(var/mob/living/l in range(breachlocation, 10))
 			var/rads = (  fuelpower*powerfactor/100000   ) * sqrt(1/(max(get_dist(l, breachlocation), 1)))
 			l.apply_radiation(rads, RAD_EXTERNAL)
 	
