@@ -6,12 +6,12 @@
 	var/new_volume = 100
 
 
-/datum/musical_event/New(datum/sound_player/source, mob/subject, sound/object, time, volume)
-	src.source = source
-	src.subject = subject
-	src.object = object
-	src.time = time
-	src.new_volume = volume
+/datum/musical_event/New(datum/sound_player/source_, mob/subject_, sound/object_, time_, volume_)
+	src.source = source_
+	src.subject = subject_
+	src.object = object_
+	src.time = time_
+	src.new_volume = volume_
 
 
 /datum/musical_event/proc/tick()
@@ -38,51 +38,3 @@
 		src.source.song.free_channel(src.object.channel)
 
 
-/datum/musical_event_manager
-	var/list/datum/musical_event/events = list()
-	var/suspended = 0
-	var/active = 0
-	var/kill_loop = 0
-
-
-/datum/musical_event_manager/proc/push_event(datum/sound_player/source, mob/subject, sound/object, time, volume)
-	if (istype(source) && istype(subject) && istype(subject) && istype(object) && volume >= 0 && volume <= 100)
-		src.events += new /datum/musical_event(source, subject, object, time, volume)
-
-
-/datum/musical_event_manager/proc/activate()
-	if (active)	return 0
-	src.active = 1
-
-	spawn
-		var/list/datum/musical_event/left_events = list()
-		while (1)
-			left_events.Cut()
-			if (src.kill_loop)
-				src.active = 0
-				src.kill_loop = 0
-				break
-			if (!src.suspended)
-				for (var/datum/musical_event/event in src.events)
-					event.time -= world.tick_lag
-					if (event.time <= 0)
-						event.tick()
-					else left_events += event
-				src.events.Cut()
-				src.events += left_events
-			sleep(world.tick_lag) // High priority
-
-
-/datum/musical_event_manager/proc/deactivate()
-	if (src.kill_loop) return 0
-	if (src.active) src.kill_loop = 1
-	for (var/datum/musical_event/event in src.events)
-		event.destroy_sound()
-	src.events.Cut()
-	src.active = 0
-	src.suspended = 0
-	return 1
-
-
-/datum/musical_event_manager/proc/is_overloaded()
-	return src.events.len > global.musical_config.max_events

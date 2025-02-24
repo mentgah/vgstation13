@@ -2,8 +2,8 @@
 	autorepeat = 0 ;\
 	playing = 0 ;\
 	current_line = 0 ;\
-	player.event_manager.deactivate() ;\
 	return
+	
 
 /datum/synthesized_song
 	var/list/lines = list()
@@ -132,7 +132,7 @@
 			current_volume = new_volume
 			continue
 		current_volume = sanitized_volume
-		src.player.event_manager.push_event(src.player, who, sound_copy, tick, current_volume)
+		SSmusic.push_event(src.player, who, sound_copy, tick, current_volume)
 		if (current_volume <= 0)
 			break
 
@@ -143,7 +143,6 @@
 /datum/synthesized_song/proc/play_song(mob/user)
 	// This code is really fucking horrible.
 	src.player.cache_unseen_tiles()
-	src.player.event_manager.activate()
 	var/list/allowed_suff = list("b", "n", "#", "s")
 	var/list/note_off_delta = list("a"=91, "b"=91, "c"=98, "d"=98, "e"=98, "f"=98, "g"=98)
 	var/list/lines_copy = src.lines.Copy()
@@ -163,7 +162,6 @@
 					var/note_str = splittext(components[1], "-")
 
 					duration = sanitize_tempo(src.tempo / delta)
-					src.player.event_manager.suspended = 1
 					for (var/note in note_str)
 						if (!note)	continue // wtf, empty note
 						var/note_sym = CP(note, 1)
@@ -194,10 +192,9 @@
 						cur_octaves[note_off] = octave
 						cur_accidentals[note_off] = accidental
 						play_synthesized_note(note_off, accidental, octave+transposition, duration, src.current_line, cur_note)
-						if (src.player.event_manager.is_overloaded())
+						if (SSmusic.is_overloaded())
 							STOP_PLAY_LINES
 				cur_note++
-				src.player.event_manager.suspended = 0
 				if (!src.playing || src.player.shouldStopPlaying(user))
 					STOP_PLAY_LINES
 				sleep(duration)
