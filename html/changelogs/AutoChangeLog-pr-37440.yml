@@ -1,0 +1,16 @@
+author: CrazyAmphibian
+delete-after: true
+changes:
+- tweak: the reactor expansion-pak now only gives 1 control rod circuit board (instead
+    of 2) to reduce clutter.
+- tweak: reactor now irradiate over a larger area.
+- tweak: reactor casings take less time to build
+- tweak: reactor casings with piping now visually show their direction
+- bugfix: fixed the ISC not being able to be deconstructed
+- bugfix: fixed reactor girders not giving the correct number of plasteel sheets when
+    deconstructing
+- bugfix: fixed piping from reactors not returning the correct pipe
+- imageadd: fuel rods will now animate when a reactor is on
+- spellcheck: fission reactor coolant ports no longer face ''soth''
+- spellcheck: the NantoTrasen engineering team has revised the reactor guidebook to
+    address a few lingering questions about the design of reactors.
