@@ -1,0 +1,4 @@
+author: west3436
+delete-after: true
+changes:
+- bugfix: Plasma glass shards will now recycle properly.
