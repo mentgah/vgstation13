@@ -112,6 +112,7 @@
 		new_instrument.create_full_sample_deviation_map()
 		src.instruments[new_instrument.name] = new_instrument
 	src.player = new /datum/sound_player/synthesizer(src, instruments[pick(instruments)])
+	icon_state = pick("nusynth","nusynth2")
 
 
 /obj/structure/synthesized_instrument/synthesizer/attackby(obj/item/O, mob/user, params)
